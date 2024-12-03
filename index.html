@@ -115,7 +115,12 @@
     </ul>
     
   </div>
-  
+
+<!-- Tooltip HTML -->
+<div id="tooltip" style="position: absolute; visibility: hidden; background-color: white; border: 1px solid #ccc; padding: 10px; z-index: 10;">
+  <img id="tooltip-img" src="" alt="State Image" style="width: 100px; height: auto;">
+  <div id="tooltip-text"></div>
+</div>
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/visualization.js"></script>
