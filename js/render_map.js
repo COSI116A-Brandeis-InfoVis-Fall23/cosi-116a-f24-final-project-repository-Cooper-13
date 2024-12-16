@@ -46,7 +46,7 @@ function map() {
                 .append("path")
                 .attr("d", path)
                 .style("fill", function (d) {
-                    var name = d.properties.STATENAM.replace(" Territory", "");
+                    var name = d.properties.STATENAM.replace("", "");
                     return colors_state[name];
                 })
                 .on("mouseover", (event, d) => handleMouseOver(event, d, path, state))
@@ -57,7 +57,7 @@ function map() {
 
             // Add event listener for table row selection
             d3.selectAll("table tr").on("click", function() {
-                var stateName = d3.select(this).select("td").text().replace(" Territory", "");
+                var stateName = d3.select(this).select("td").text().replace("", "");
                 highlightState(stateName);
             });
             
@@ -65,7 +65,7 @@ function map() {
 
 
         function handleStateClick(event, d) {
-            var stateName = d3.select(this).select("title").text().replace(" Territory", ""); // Access the title tag
+            var stateName = d3.select(this).select("title").text().replace("", ""); // Access the title tag
             highlightState(stateName);
         }
 
@@ -73,8 +73,8 @@ function map() {
         function highlightState(stateName) {
             svgStates.selectAll("path")
                 .style("fill", function(d) {
-                    var currentColor = useStateColors ? colors_state[d.properties.STATENAM.replace(" Territory", "")] : colors_total[d.properties.STATENAM.replace(" Territory", "")];
-                    return d.properties.STATENAM.replace(" Territory", "") === stateName ? (useStateColors ? "#0000FF" : "blue") : currentColor;
+                    var currentColor = useStateColors ? colors_state[d.properties.STATENAM.replace("", "")] : colors_total[d.properties.STATENAM.replace("", "")];
+                    return d.properties.STATENAM.replace("", "") === stateName ? (useStateColors ? "#0000FF" : "blue") : currentColor;
                 });
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
             dispatcher.call(dispatchString, this, [stateName]);
@@ -82,7 +82,7 @@ function map() {
 
         // Event handlers for mouse interactions
         function handleMouseOver(event, d, path, state) {
-            var name = state.features[d].properties.STATENAM.replace(" Territory", "");
+            var name = state.features[d].properties.STATENAM.replace("", "");
             var centroid = path.centroid(d);
     
             
@@ -108,7 +108,7 @@ function map() {
                 .transition()
                 .duration(500)
                 .style("fill", d => {
-                    var name = d.properties.STATENAM.replace(" Territory", "");
+                    var name = d.properties.STATENAM.replace("", "");
                     return useStateColors ? colors_state[name] : colors_total[name];
                 });
         }

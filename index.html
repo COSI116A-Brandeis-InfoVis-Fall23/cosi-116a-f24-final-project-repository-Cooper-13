@@ -146,39 +146,46 @@
     <h1>Visualization explanation</h1>
 
     <p>There’s a few different components of our UI we’d like to talk about. First is the 
-      brushing/linking between the table and the map. When an element is selected on one of 
-      these, it becomes selected on the other. This is to provide more detailed information, 
-      organized in a different fashion, about each state. It also allows users to understand 
-      what the colors on this map actually mean. The legend on our map also aids users in understanding what they’re looking at.
-      <br><br>Users may also use the “toggle colors” button to switch between a view of states organized by DoD% of state budget 
-      (red) and the state’s DoD spending as a % of national DoD spending (gold). We find that these are both interesting data 
-      points to consider, so we wanted to give our users the opportunity to swap fluidly between them.  
-      <br><br>Each of these views, DoD % of state budget and state % of total DoD spending, had their colors
-      chosen deliberately. We didn’t choose to use opposing colors (red and blue, for example),
-      because we didn’t want to portray that more DoD spending is necessarily a bad thing. Instead,
-      we chose to use high contrast colors (red and gold) so that the more highly-saturated colors
-      stand out against the near-white ones. Additionally, red and gold as a color pair don’t carry
-      much inherent political meaning within the United States, so any accidental bias from our viewer can be avoided.
+      brushing/linking between the table and the map. When an element is selected on one 
+      of these, it becomes selected on the other. This is to provide more detailed 
+      information, organized in a different fashion, about each state. It also allows 
+      users to understand what the colors on this map actually mean. The legend on our 
+      map also aids users in understanding what they’re looking at.
+      <br><br>
+      Users may also use the “toggle colors” button to switch between a view of states 
+      organized by DoD% of state budget (red) and the state’s DoD spending as a % of national 
+      DoD spending (gold). We find that these are both interesting data points to consider, 
+      so we wanted to give our users the opportunity to swap fluidly between them.
+      <br><br>
+      Finally, we also have a popup that appears when users mouse over a state, a bar 
+      graph that appears between the map and the table. This bar graph shows more information 
+      about the federal government departments that spend the most in each state (details on demand). 
+      The red “mode” on the map already shows what percentage of in-state spending is from the DoD, 
+      but this shows users what other federal departments are big spenders within the state. We find 
+      this to be particularly interesting in states with low percentages of DoD spending, because the 
+      other dominant departments can be seen.
       </p>
 
     <br>
 
     <h1>Data Analysis</h1>
     <p>Our data comes from the U.S. government’s public repository of state-level spending data, 
-      at <a href="https://www.usaspending.gov/state">https://www.usaspending.gov/state</a>. 
+      at <a href="https://www.usaspending.gov/state">this link</a>. 
       For each state, we filtered the data to be from January 1st, 2023 to December 31st, 2023. 
       Some states still had too many records to download, so we filtered the data to
       only include transactions over $250. We feel that both of these filters 
-      ensure that our data is a representative sample of government spending over the course, 
-      addressing data availability concerns without compromising on data validity. Once the 
-      data was downloaded, we extracted the total outlayed amount for the Department of Defense 
+      ensure that our data is a representative sample of government spending over the course of a year, 
+      addressing data availability concerns well without compromising on data validity. 
+      <br><br>
+      Once the data was downloaded, we extracted the total outlayed amount for the Department of Defense 
       and the other three departments that spent the most in that state. This allowed us to create 
       a representative sample of the state’s total spending, as there was typically a large drop 
       off after the first few highest-spending departments. This process was repeated for each state, 
       and provided us with all the data we would need to complete our visualization. We put the total 
-      outlayed amount for each state into Tableau to create the bar graphs necessary for our tooltips, 
+      outlayed amount for each state into Tableau to create the bar graphs necessary for our side box graph pop-up, 
       used the DoD’s spending to color in our heatmap, and used all of the data to create our table.
-      <br><br>We chose not to include the spending data for every department that operated within each state. 
+      <br><br>
+      We chose not to include the spending data for every department that operated within each state. 
       By narrowing our focus to only the Department of Defense and the other top three departments, 
       we feel that we created a more easily understood (but still insightful) visualization.
       </p>
@@ -198,9 +205,11 @@
       we must first understand government spending. The goals of this task are to summarize, 
       explore, and discover data. Our third most important goal is to see what problems the 
       wasted money could address. This is addressed in our conclusion. The goal of this task is 
-      to identify, browse, and discover the data. <br><br>While the first two tasks are essential to the 
-      visualization itself, the third task is especially important to its interpretation. By 
-      gaining an understanding of what the U.S. government could alternatively spend its budget 
+      to identify, browse, and discover the data. 
+      <br><br>
+      While the first two tasks are essential to the visualization itself, the third 
+      task is especially important to its interpretation. By gaining an understanding of 
+      what the U.S. government could alternatively spend its budget 
       on, the spending choices it currently makes take on new meanings.
       </p>
 
@@ -215,15 +224,16 @@
       attributed to the Department of Defense. Combined, these will provide an accurate 
       picture of the Department’s spending nationwide. We’re using the color red to emphasize 
       the violent nature of many Department of Defense operations, and the gravity of the amount that they are spending.
-      When a state is moused over, a tooltip will pop up, containing a blue bar graph 
+      When a state is moused over, a side box will pop up, containing a blue bar graph 
       showing more information about the spending within the state. The corresponding 
       row in the table will also light up in blue. We chose to use blue to contrast with 
       the red of the heat map, drawing attention to the small details that we’re making available.
       <br><br>
       We've also added a second heat map, the gold one that can be seen when colors are toggled, to show the
       percentage of the DoD's total, national spending that happened in each state. We iterated on the colors, and the 
-      transitions between them many times, and eventually settled on the slow transition between the two maps,
-      and the use of another white-to-high-contrast-color gradient for the same reasons we mentioned above.
+      transitions between them many times. We eventually settled on gold, because it's distinct enough from the red scale.
+      that we used so that users will not mix up our two maps. We also chose to use blue as the color for our highlights (both
+      on the table and on the map), because it's distinct from both the red and the gold.
     </p>
 
     <br>
@@ -235,14 +245,16 @@
       the results we were able to show, happy about the overall quality of our visualization, and satisfied with 
       our work this semester. We feel that we accurately portrayed DoD spending, and showed the sheer scale of it on 
       a national level. While this has been done before, we feel that breaking it down by state was a somewhat novel approach.
-      <br><br>We do, however, acknowledge that there’s certainly more to be done. In an ideal world, we would have been 
+      <br><br>
+      We do, however, acknowledge that there’s certainly more to be done. In an ideal world, we would have been 
       able to investigate individual DoD contractors and possibly even display data on a county level instead of 
       a state level. By investigating individual DoD contractors, we think we would have found interesting patterns 
       about U.S. government spending, waste, and maybe even corruption. By breaking data down to the county level, 
       we may have been able to show even more interesting nationwide patterns. Still, though, we feel that 
       this visualization showcases our abilities, and our findings, quite well.
-      <br><br>For future work, we would love to summarize what problems DoD spending could otherwise address. 
-      Overall, the DoD spent $1,325,974,585,251 in 2023. That is a shocking high amount of money, and 
+      <br><br>
+      For future work, we would love to summarize what problems DoD spending could otherwise address. 
+      Overall, the DoD spent $1,325,974,585,251 in 2023. That is a shockingly high amount of money, and 
       it could be used to provide universal healthcare, solve homelessness, or otherwise address any 
       number of national problems. This is an ongoing, and well-publicized, topic that could be a full research project on its own.
       </p>
@@ -251,12 +263,12 @@
 
     <h1>Acknowledgments</h1>    
     <ul>
+      <li>COSI 116A In-Class Maps Assignment</li>
+      <li>COSI 116A HW4</li>
       <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
       <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
       <li><a href="https://www.usaspending.gov/state">USAspending.gov</a></li>
       <li><a href="https://d3-graph-gallery.com/heatmap">D3 Graph Library</a></li>
-      <li>COSI 116A In-Class Maps Assignment</li>
-      <li>COSI 116A HW4</li>
       <li><a href="https:github.com/topojson/topojson-client">Mike Bostock's TopoJson</a></li>
       <li><a href="https://d3-graph-gallery.com/heatmap">W3 School's Button Guide</a></li>
       <li><a href="https://observablehq.com/@chrisdaly/usa-county-heat-map">Chris Daly's County Heat Map</a></li>
