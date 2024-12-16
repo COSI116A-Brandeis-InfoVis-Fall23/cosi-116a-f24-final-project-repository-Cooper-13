@@ -22,8 +22,6 @@ function table() {
 	// Append a <thead> to the table and a <tr> to the thead
     let tableHeaders = Object.keys(data[0]);
 	
-    
-	
     let tr = table.append('thead').append('tr')
     tr.selectAll('th').data(tableHeaders).enter().append('th').text((d) => d);
 
@@ -39,15 +37,12 @@ function table() {
 		});
 		 
 
-	
-	
-
 	// Append <td> cells to each <tr>
 	rows.selectAll("td")
 		.data(d => Object.values(d))  // Use the values of each data object
 		.enter()
 		.append("td")
-		.text(d => d)
+		.text(d => d);
     
 	let isMouseDown = false;
 	
@@ -61,13 +56,11 @@ function table() {
 
 		dispatcher.call(dispatchString, this, d3.select("tr").data());
 		
-
 		//Sets the row clicked to selected
 		d3.select(this).classed("selected", true);
 
 		//Dispatches the row that it was selected
 		dispatcher.call(dispatchString, this, d3.selectAll(".selected").data());
-
 		
 		isMouseDown = true;
 	})
@@ -89,11 +82,11 @@ function table() {
 			//If mouse is up and goes over a selected row, make the background color blue
 			d3.selectAll("tr").style("background-color", null);
 			if (d3.select(this).classed("selected")){
-				d3.select(this).style("background-color", "blue")
+				d3.select(this).style("background-color", "blue");
 			}
 			//If mouse is up and goes over a unselected row, make the background color gray
 			else{
-				d3.select(this).style("background-color", "lightgray")
+				d3.select(this).style("background-color", "lightgray");
 			}
 		}
 	})
@@ -105,8 +98,6 @@ function table() {
 
     return chart;
   }
-
-
 
   // Gets or sets the dispatcher we use for selection events
   chart.selectionDispatcher = function (_) {
@@ -128,11 +119,7 @@ function table() {
         // Check if the row's id matches the selectedData (state name)
         return rowId === selectedData;
     });
-	
-
 }
-		
-	
-	
+
   return chart;
 }

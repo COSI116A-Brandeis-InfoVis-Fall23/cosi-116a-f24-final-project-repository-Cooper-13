@@ -48,15 +48,11 @@ function map() {
                 .style("fill", function (d) {
                     var name = d.properties.STATENAM.replace(" Territory", "");
                     return colors_state[name];
-
                 })
                 .on("mouseover", (event, d) => handleMouseOver(event, d, path, state))
                 .on("mouseout", handleMouseOut)
-                .on("click", handleStateClick)
-                // .on("mousedown", handleMouseDown)
-                // .on("mouseup", handleMouseUp)
-                // .on("mouseover", handleMouseOver)
-                
+                .on("click", handleStateClick);
+            
                 statepaths.append("title").text(d => d.properties.STATENAM);
 
             // Add event listener for table row selection
@@ -66,69 +62,27 @@ function map() {
             });
             
         });
-        // function handleMouseDown(event, d) {
-        //     d3.selectAll(this).classed("selected", false);
 
-        //     var stateName = d3.select(this).select("title").text().replace(" Territory", ""); // Access the title tag
-
-        //     let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-
-        //     dispatcher.call(dispatchString, this, [stateName]);
-
-
-        //     d3.select(this).classed("selected", true);
-        //     dispatcher.call(dispatchString, this, [stateName]);
-
-        //     isMouseDown = true;
-        // }
-
-        // function handleMouseUp(event, d) {
-        //     isMouseDown = false;
-        // }
-
-        // function handleMouseOver(event, d) {
-        //     if (isMouseDown){
-                
-        //         d3.select(this).classed("selected", true);
-
-        //         var stateName = d3.select(this).select("title").text().replace(" Territory", ""); // Access the title tag
-
-        //         selectedStates.add(stateName);
-                
-
-        //         // let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-
-        //         // dispatcher.call(dispatchString, this, Array.from(selectedStates));
-
-        //     }
-        //     let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-
-        //     dispatcher.call(dispatchString, this, Array.from(selectedStates));
-
-
-        // }
-
-       
 
         function handleStateClick(event, d) {
             var stateName = d3.select(this).select("title").text().replace(" Territory", ""); // Access the title tag
             highlightState(stateName);
         }
 
+        
         function highlightState(stateName) {
             svgStates.selectAll("path")
                 .style("fill", function(d) {
                     var currentColor = useStateColors ? colors_state[d.properties.STATENAM.replace(" Territory", "")] : colors_total[d.properties.STATENAM.replace(" Territory", "")];
                     return d.properties.STATENAM.replace(" Territory", "") === stateName ? (useStateColors ? "#0000FF" : "blue") : currentColor;
                 });
-
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
             dispatcher.call(dispatchString, this, [stateName]);
         }
 
         // Event handlers for mouse interactions
         function handleMouseOver(event, d, path, state) {
-            var name = state.features[d].properties.STATENAM.replace(" Territory", ""); // OMG SO IMPORTANT
+            var name = state.features[d].properties.STATENAM.replace(" Territory", "");
             var centroid = path.centroid(d);
     
             
@@ -148,65 +102,6 @@ function map() {
         }
         
 
-        // function handleMouseClick(event, d, state, name){
-            
-        //     d3.select(event.currentTarget)
-        //         .style("fill", () => {
-        //             var name = d.properties.STATENAM.replace(" Territory", "");
-        //             return colors_highlight[name] || "#0000ff"; // Default blue for testing
-        //         });
-            
-            
-            
-        //     svgStates.selectAll("path")
-        //     .data(state.features)
-        //     .enter()
-        //     .append("path")
-        //     .attr("d", path)
-        //     .style("fill", function (d) {
-        //         var name = d.properties.STATENAM.replace(" Territory", "");
-        //         return colors_highlight[name];
-        //     });
-            
-        
-        //     var singleState = state.features.filter(d => d.properties.STATENAM === name)[0];
-
-        //     d3.select("#singleState")
-        //     .style("fill", "blue")
-        //     // Select the popup element
-        //     var popup = d3.select("#popup");
-        
-        //     // Check if the popup is already enlarged
-        //     var isLarge = popup.classed("large");
-        
-        //     // Toggle the size
-        //     if (isLarge) {
-        //         // Shrink the popup
-        //         popup
-        //         .classed("large", false)
-        //         .style("transform", "scale(1)") // Reset size
-        //         .style("z-index", 1000) // Reset z-index
-        //         .html(`
-        //             <strong>${name}</strong><br>
-        //             <img src="images/${name}.png" alt="${name}" style="max-width: 100px; display: block; margin: 10px 0;">
-        //         `);
-
-        //     } else {
-        //         // Enlarge the popup
-        //         popup
-        //         .classed("large", true)
-        //         .style("transform", "scale(1.5)") // Enlarge size
-        //         .style("z-index", 2000) // Bring to front
-        //         .html(`
-        //             <strong>${name}</strong><br>
-        //             <img src="images/${name}.png" alt="${name}" style="max-width: 200px; display: block; margin: 10px 0;">
-                    
-        //         `);
-                
-        //     }
-        
-        //     }
-
         // Update map colors dynamically
         function updateMapColors() {
             svgStates.selectAll("path")
@@ -225,7 +120,6 @@ function map() {
         });
 
        
-
         function handleMouseOut() {
             d3.select("#popup").style("display", "none");
         }
@@ -242,9 +136,7 @@ function map() {
 
     // Links selected data to the map (if integrating with other components)
     chart.updateSelection = function (selectedData) {
-        if (!arguments.length) return;
-        
-        // d3.selectAll(".state").classed("selected", d => selectedData.includes(d.properties.STATENAM.replace(" Territory", "")));
+        if (!arguments.length) return;        
     };
 
     return chart;
